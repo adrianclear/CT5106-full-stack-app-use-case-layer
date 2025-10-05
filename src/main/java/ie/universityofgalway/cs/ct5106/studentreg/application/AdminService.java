@@ -14,10 +14,9 @@ public class AdminService {
     }
 
     public StudentId addStudent(String firstName, String lastName, String email) {
-        StudentId id = StudentId.random();
-        Student s = new Student(id, StudentName.of(firstName, lastName), EmailAddress.of(email));
+        Student s = Student.create(StudentName.of(firstName, lastName), EmailAddress.of(email));
         students.save(s);
-        return id;
+        return s.id();
     }
 
     public List<Student> listStudents() {
