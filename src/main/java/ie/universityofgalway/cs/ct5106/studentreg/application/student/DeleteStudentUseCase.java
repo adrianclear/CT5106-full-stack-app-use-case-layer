@@ -1,6 +1,8 @@
-package ie.universityofgalway.cs.ct5106.studentreg.application.student.dto;
+package ie.universityofgalway.cs.ct5106.studentreg.application.student;
 
 import ie.universityofgalway.cs.ct5106.studentreg.application.common.UseCase;
+import ie.universityofgalway.cs.ct5106.studentreg.application.student.dto.DeleteStudentCommand;
+import ie.universityofgalway.cs.ct5106.studentreg.application.student.dto.DeleteStudentResponse;
 import ie.universityofgalway.cs.ct5106.studentreg.domain.student.StudentId;
 import ie.universityofgalway.cs.ct5106.studentreg.domain.student.StudentRepository;
 
@@ -17,6 +19,6 @@ public class DeleteStudentUseCase implements UseCase<DeleteStudentCommand, Delet
     @Override
     public DeleteStudentResponse execute(DeleteStudentCommand command) {
         studentRepository.deleteById(StudentId.of(UUID.fromString(command.studentId())));
-        return new DeleteStudentResponse("studentId");
+        return new DeleteStudentResponse(command.studentId());
     }
 }

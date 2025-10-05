@@ -1,29 +1,34 @@
 package ie.universityofgalway.cs.ct5106.studentreg.application.student;
 
+import ie.universityofgalway.cs.ct5106.studentreg.application.common.UseCase;
+import ie.universityofgalway.cs.ct5106.studentreg.application.common.exceptions.StudentNotFoundException;
+import ie.universityofgalway.cs.ct5106.studentreg.application.student.dto.EnrolStudentToCourseCommand;
+import ie.universityofgalway.cs.ct5106.studentreg.application.student.dto.EnrolStudentToCourseResponse;
+import ie.universityofgalway.cs.ct5106.studentreg.domain.course.CourseId;
+import ie.universityofgalway.cs.ct5106.studentreg.domain.student.StudentId;
 import ie.universityofgalway.cs.ct5106.studentreg.domain.student.StudentRepository;
 import ie.universityofgalway.cs.ct5106.studentreg.domain.course.CourseRepository;
+import ie.universityofgalway.cs.ct5106.studentreg.domain.student.Student;
 
+import java.util.UUID;
 
-public class RegisterStudentToCoursesUseCase implements UseCase<RegisterStudentToCoursesRequest, Void> {
+public class EnrolStudentToCourseUseCase implements UseCase<EnrolStudentToCourseCommand, EnrolStudentToCourseResponse> {
 
     private final StudentRepository studentRepository;
     private final CourseRepository courseRepository;
 
-    public RegisterStudentToCoursesUseCase(StudentRepository studentRepository,
-                                           CourseRepository courseRepository) {
+    public EnrolStudentToCourseUseCase(StudentRepository studentRepository, CourseRepository courseRepository) {
         this.studentRepository = studentRepository;
         this.courseRepository = courseRepository;
     }
 
-    public void execute(RegisterStudentToCoursesRequest request) {
-        Student student = studentRepository.findById(request.studentId())
+    @Override
+    public EnrolStudentToCourseResponse execute(EnrolStudentToCourseCommand request) {
+        Student student = studentRepository.findById(StudentId.of(UUID.fromString(request.studentId())))
                 .orElseThrow(() -> new StudentNotFoundException(request.studentId()));
 
-        for (Long courseId : request.courseIds()) {
-            Course course = courseRepository.findById(courseId)
-                    .orElseThrow(() -> new CourseNotFoundException(courseId));
-            Enrollment enrollment = new Enrollment(student, course);
-            enrollmentRepository.save(enrollment);
-        }
+        student.enrollTo(CourseId.of(UUID.fromString(request.courseId())));
+        studentRepository.save(student);
+        return new EnrolStudentToCourseResponse(student.id().toString(), request.courseId(), "ENROLLED");
     }
 }

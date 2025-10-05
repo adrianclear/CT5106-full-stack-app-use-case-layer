@@ -20,10 +20,15 @@ public class Student {
 
     // Aggregate root creation should go through a factory method or constructor that enforces invariants.
     // Public constructor that allows raw IDs is generally discouraged (can you trust the caller?)
-    public Student(StudentId id, StudentName name, EmailAddress email) {
+    private Student(StudentId id, StudentName name, EmailAddress email) {
         this.id = id;
         this.name = name;
         this.email = email;
+    }
+
+    public static Student create(StudentName name, EmailAddress email) {
+        // enforce invariants here if needed
+        return new Student(StudentId.random(), name, email);
     }
 
     public StudentId id() {

@@ -1,4 +1,4 @@
 package ie.universityofgalway.cs.ct5106.studentreg.application.student.dto;
 
-public record StudentCourseRequest(String studentId) {
+public record StudentCoursesRequest(String studentId) {
 }

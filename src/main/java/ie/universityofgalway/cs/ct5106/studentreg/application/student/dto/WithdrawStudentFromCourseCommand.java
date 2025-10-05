@@ -1,2 +1,3 @@
-package ie.universityofgalway.cs.ct5106.studentreg.application.student.dto;public record WithdrawStudentFromCourseCommand() {
-}
+package ie.universityofgalway.cs.ct5106.studentreg.application.student.dto;
+
+public record WithdrawStudentFromCourseCommand(String studentId, String courseId) {}
