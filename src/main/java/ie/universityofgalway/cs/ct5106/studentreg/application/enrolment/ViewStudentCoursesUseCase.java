@@ -1,4 +1,4 @@
-package ie.universityofgalway.cs.ct5106.studentreg.application.student;
+package ie.universityofgalway.cs.ct5106.studentreg.application.enrolment;
 
 import ie.universityofgalway.cs.ct5106.studentreg.application.common.UseCase;
 import ie.universityofgalway.cs.ct5106.studentreg.application.student.dto.StudentCoursesRequest;

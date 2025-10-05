@@ -1,4 +1,4 @@
-package ie.universityofgalway.cs.ct5106.studentreg.application.student;
+package ie.universityofgalway.cs.ct5106.studentreg.application.enrolment;
 
 import ie.universityofgalway.cs.ct5106.studentreg.application.common.UseCase;
 import ie.universityofgalway.cs.ct5106.studentreg.application.common.exceptions.StudentNotFoundException;
@@ -7,7 +7,6 @@ import ie.universityofgalway.cs.ct5106.studentreg.application.student.dto.EnrolS
 import ie.universityofgalway.cs.ct5106.studentreg.domain.course.CourseId;
 import ie.universityofgalway.cs.ct5106.studentreg.domain.student.StudentId;
 import ie.universityofgalway.cs.ct5106.studentreg.domain.student.StudentRepository;
-import ie.universityofgalway.cs.ct5106.studentreg.domain.course.CourseRepository;
 import ie.universityofgalway.cs.ct5106.studentreg.domain.student.Student;
 
 import java.util.UUID;
@@ -15,11 +14,9 @@ import java.util.UUID;
 public class EnrolStudentToCourseUseCase implements UseCase<EnrolStudentToCourseCommand, EnrolStudentToCourseResponse> {
 
     private final StudentRepository studentRepository;
-    private final CourseRepository courseRepository;
 
-    public EnrolStudentToCourseUseCase(StudentRepository studentRepository, CourseRepository courseRepository) {
+    public EnrolStudentToCourseUseCase(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
-        this.courseRepository = courseRepository;
     }
 
     @Override

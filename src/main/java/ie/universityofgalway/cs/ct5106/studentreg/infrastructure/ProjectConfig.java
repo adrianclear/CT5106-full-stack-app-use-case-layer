@@ -1,9 +1,7 @@
 package ie.universityofgalway.cs.ct5106.studentreg.infrastructure;
 
-import ie.universityofgalway.cs.ct5106.studentreg.application.student.AddStudentUseCase;
-import ie.universityofgalway.cs.ct5106.studentreg.application.student.DeleteStudentUseCase;
-import ie.universityofgalway.cs.ct5106.studentreg.application.student.UpdateStudentDetailsUseCase;
-import ie.universityofgalway.cs.ct5106.studentreg.application.student.ViewAllStudentsUseCase;
+import ie.universityofgalway.cs.ct5106.studentreg.application.enrolment.*;
+import ie.universityofgalway.cs.ct5106.studentreg.application.student.*;
 import ie.universityofgalway.cs.ct5106.studentreg.domain.student.StudentRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -36,5 +34,32 @@ public class ProjectConfig {
     public DeleteStudentUseCase deleteStudentUseCase(StudentRepository studentRepository) {
         return new DeleteStudentUseCase(studentRepository);
     }
+
+    @Bean
+    public EnrolStudentToCourseUseCase enrolStudentToCourseUseCase(StudentRepository studentRepository) {
+        return new EnrolStudentToCourseUseCase(studentRepository);
+    }
+
+    @Bean
+    WithdrawStudentFromCourseUseCase withdrawStudentFromCourseUseCase(StudentRepository studentRepository) {
+        return new WithdrawStudentFromCourseUseCase(studentRepository);
+    }
+
+    @Bean
+    CompleteCourseUseCase completeCourseUseCase(StudentRepository studentRepository) {
+        return new CompleteCourseUseCase(studentRepository);
+    }
+
+    @Bean
+    RemoveStudentFromCourseUseCase removeStudentFromCourseUseCase(StudentRepository studentRepository) {
+        return new RemoveStudentFromCourseUseCase(studentRepository);
+    }
+
+    @Bean
+    ViewStudentCoursesUseCase viewStudentCoursesUseCase(StudentRepository studentRepository) {
+        return new ViewStudentCoursesUseCase(studentRepository);
+    }
+
+
 
 }
